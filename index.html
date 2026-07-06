@@ -300,6 +300,18 @@
   :root[dir="rtl"] .wordmark, :root[dir="rtl"] footer a, :root[dir="rtl"] .langs { direction: ltr; }
   :root[dir="rtl"] .eyebrow, :root[dir="rtl"] .thesis span, :root[dir="rtl"] .by-inline { letter-spacing: normal; text-transform: none; }
   @media (max-width: 560px) { .by-inline { display: none; } }
+
+  /* Header right cluster: section nav + language switcher */
+  .header-right { display: flex; align-items: center; gap: 20px; flex-wrap: wrap; justify-content: flex-end; }
+  .site-nav { display: flex; gap: 18px; }
+  .site-nav a { color: var(--muted); text-decoration: none; font-size: 14px; white-space: nowrap; transition: color .18s; }
+  .site-nav a:hover { color: var(--copper-bright); }
+  /* Prominent secondary CTA in the hero → the Waste Audit lead magnet */
+  .audit-cta { display: inline-block; align-self: flex-start; margin-top: 22px; color: var(--copper-bright);
+    text-decoration: none; font-size: 14.5px; border-bottom: 1px solid var(--hairline); padding-bottom: 2px;
+    transition: color .18s, border-color .18s; }
+  .audit-cta:hover { color: var(--copper); border-color: var(--copper); }
+  :root[dir="rtl"] .site-nav { direction: rtl; }
 </style>
 
 <div class="vessel" aria-hidden="true">
@@ -313,15 +325,21 @@
       <img class="mark" src="data:image/png;base64,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" alt="Level Ledger app icon" width="34" height="34">
       <span class="wordmark">Level&nbsp;Ledger <span class="by-inline">by Bar_Melis</span></span>
     </div>
-    <nav class="langs" aria-label="Language">
-      <button type="button" data-lang="en" lang="en" aria-pressed="true">EN</button>
-      <button type="button" data-lang="it" lang="it">IT</button>
-      <button type="button" data-lang="es" lang="es">ES</button>
-      <button type="button" data-lang="fr" lang="fr">FR</button>
-      <button type="button" data-lang="de" lang="de">DE</button>
-      <button type="button" data-lang="ar" lang="ar">عربي</button>
-      <button type="button" data-lang="zh" lang="zh">中文</button>
-    </nav>
+    <div class="header-right">
+      <nav class="site-nav" aria-label="Sections">
+        <a href="audit.html">Waste Audit</a>
+        <a href="about.html">Story</a>
+      </nav>
+      <nav class="langs" aria-label="Language">
+        <button type="button" data-lang="en" lang="en" aria-pressed="true">EN</button>
+        <button type="button" data-lang="it" lang="it">IT</button>
+        <button type="button" data-lang="es" lang="es">ES</button>
+        <button type="button" data-lang="fr" lang="fr">FR</button>
+        <button type="button" data-lang="de" lang="de">DE</button>
+        <button type="button" data-lang="ar" lang="ar">عربي</button>
+        <button type="button" data-lang="zh" lang="zh">中文</button>
+      </nav>
+    </div>
   </header>
 
   <main>
@@ -337,6 +355,8 @@
       <input type="hidden" name="_subject" value="Level Ledger — early access signup">
     </form>
     <p class="reassure" data-i18n="reassure">No spam. One note when the doors open — and you're first through them.</p>
+
+    <a class="audit-cta" href="audit.html" data-i18n="auditcta">How much is your bar leaking? Take the 30-second audit →</a>
 
     <div class="thesis" aria-label="Organize, weigh, save">
       <span><span class="dot full"></span> <span data-i18n="t1">Organize</span></span>
@@ -365,7 +385,8 @@
       cta: "Get early access",
       reassure: "No spam. One note when the doors open — and you're first through them.",
       t1: "Organize", t2: "Weigh", t3: "Save",
-      foot: "© 2026 Level Ledger · Built for the bar, on the bar."
+      foot: "© 2026 Level Ledger · Built for the bar, on the bar.",
+      auditcta: "How much is your bar leaking? Take the 30-second audit →"
     },
     it: {
       eyebrow: "In arrivo · 2026",
@@ -374,7 +395,8 @@
       cta: "Voglio l'accesso anticipato",
       reassure: "Niente spam. Un solo avviso quando apriamo — e sei il primo a entrare.",
       t1: "Organizza", t2: "Pesa", t3: "Risparmia",
-      foot: "© 2026 Level Ledger · Fatto per il bar, sul bancone."
+      foot: "© 2026 Level Ledger · Fatto per il bar, sul bancone.",
+      auditcta: "Quanto sta perdendo il tuo bar? Fai l'audit in 30 secondi →"
     },
     es: {
       eyebrow: "Próximamente · 2026",
@@ -383,34 +405,38 @@
       cta: "Quiero acceso anticipado",
       reassure: "Nada de spam. Un solo aviso cuando abramos — y eres el primero en entrar.",
       t1: "Organiza", t2: "Pesa", t3: "Ahorra",
-      foot: "© 2026 Level Ledger · Hecho para la barra, en la barra."
+      foot: "© 2026 Level Ledger · Hecho para la barra, en la barra.",
+      auditcta: "¿Cuánto está perdiendo tu bar? Haz la auditoría en 30 segundos →"
     },
     fr: {
       eyebrow: "Bientôt · 2026",
       h1: "Pilotez tout le bar sur des chiffres <em>enfin fiables</em>.",
       lede: "Postes prêts, mise en place planifiée, stock compté au poids, chaque coût <b>confirmé</b> — pas estimé. Level Ledger organise la vie opérationnelle de votre bar, coupe le gaspillage qui grignote votre marge et transforme les approximations de fin de mois en <b>argent que vous gardez</b>.",
-      cta: "Accès anticipé",
+      cta: "Je veux un accès anticipé",
       reassure: "Pas de spam. Un seul message à l'ouverture — et vous entrez en premier.",
       t1: "Organiser", t2: "Peser", t3: "Économiser",
-      foot: "© 2026 Level Ledger · Fait pour le bar, au comptoir."
+      foot: "© 2026 Level Ledger · Fait pour le bar, au comptoir.",
+      auditcta: "Combien votre bar perd-il ? Faites l’audit en 30 secondes →"
     },
     de: {
       eyebrow: "Demnächst · 2026",
       h1: "Führe die ganze Bar mit Zahlen, denen du <em>endlich vertraust</em>.",
       lede: "Stationen bereit, Prep geplant, Bestand nach Gewicht gezählt, jeder Kostenpunkt <b>bestätigt</b> — nicht geschätzt. Level Ledger organisiert das operative Leben deiner Bar, stoppt den Schwund, der deine Marge frisst, und macht aus dem Rätselraten zum Monatsende <b>Geld, das dir bleibt</b>.",
-      cta: "Früher Zugang",
+      cta: "Früher Zugang sichern",
       reassure: "Kein Spam. Eine Nachricht, wenn wir öffnen — und du bist als Erster dabei.",
       t1: "Organisieren", t2: "Wiegen", t3: "Sparen",
-      foot: "© 2026 Level Ledger · Für die Bar gemacht, an der Bar."
+      foot: "© 2026 Level Ledger · Für die Bar gemacht, an der Bar.",
+      auditcta: "Wie viel verliert deine Bar? Mach den Check in 30 Sekunden →"
     },
     ar: {
       eyebrow: "قريبًا · 2026",
       h1: "أدِر البار بالكامل بأرقام <em>يمكنك أخيرًا الوثوق بها</em>.",
       lede: "محطات جاهزة، تحضير مُخطَّط، مخزون محسوب بالوزن، وكل تكلفة <b>مؤكَّدة</b> — لا مُقدَّرة. ينظّم Level Ledger الحياة التشغيلية لبارك، ويوقف الهدر الذي يستنزف هامشك، ويحوّل تخمينات نهاية الشهر إلى <b>مال يبقى معك</b>.",
-      cta: "احصل على وصول مبكر",
+      cta: "أريد الوصول المبكر",
       reassure: "بلا رسائل مزعجة. رسالة واحدة عند الافتتاح — وستكون أول الداخلين.",
       t1: "نظّم", t2: "زِن", t3: "وفّر",
-      foot: "© 2026 Level Ledger · صُنع للبار، خلف البار."
+      foot: "© 2026 Level Ledger · صُنع للبار، خلف البار.",
+      auditcta: "كم يخسر بارك؟ جرّب التدقيق في 30 ثانية ←"
     },
     zh: {
       eyebrow: "即将上线 · 2026",
@@ -419,7 +445,8 @@
       cta: "获取抢先体验",
       reassure: "绝无垃圾邮件。开放时只发一条通知——你将第一个进入。",
       t1: "整理", t2: "称重", t3: "省钱",
-      foot: "© 2026 Level Ledger · 为吧台而生，就在吧台。"
+      foot: "© 2026 Level Ledger · 为吧台而生，就在吧台。",
+      auditcta: "你的酒吧在流失多少？做个 30 秒审计 →"
     }
   };
   var RTL = { ar: true };

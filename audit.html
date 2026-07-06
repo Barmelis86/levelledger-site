@@ -105,6 +105,11 @@
   :root[dir="rtl"] .wordmark, :root[dir="rtl"] .langs, :root[dir="rtl"] .headline, :root[dir="rtl"] .ctrl-val,
   :root[dir="rtl"] .row .v, :root[dir="rtl"] .field input, :root[dir="rtl"] footer a { direction:ltr; }
   :root[dir="rtl"] .eyebrow, :root[dir="rtl"] .cap { letter-spacing:normal; text-transform:none; }
+  .cur { margin-left:10px; background:rgba(246,241,231,.05); color:var(--cream); border:1px solid var(--hairline);
+    border-radius:8px; font-family:var(--body); font-size:13px; padding:6px 10px; cursor:pointer; }
+  .cur:hover { border-color:var(--copper); }
+  .cur:focus-visible { outline:2px solid var(--copper-bright); outline-offset:2px; }
+  :root[dir="rtl"] .cur { direction:ltr; }
 </style>
 
 <div class="glow" aria-hidden="true"></div>
@@ -122,6 +127,16 @@
       <button type="button" data-lang="ar" lang="ar">عربي</button>
       <button type="button" data-lang="zh" lang="zh">中文</button>
     </nav>
+    <select class="cur" id="cur-select" aria-label="Currency">
+      <option value="EUR">€ EUR</option>
+      <option value="USD">$ USD</option>
+      <option value="GBP">£ GBP</option>
+      <option value="CHF">CHF</option>
+      <option value="CAD">$ CAD</option>
+      <option value="AUD">$ AUD</option>
+      <option value="AED">AED</option>
+      <option value="CNY">¥ CNY</option>
+    </select>
   </header>
 
   <span class="eyebrow"><span class="seal"></span> <span data-i18n="eyebrow">Free &middot; Bar Waste Audit</span></span>
@@ -182,7 +197,12 @@
 
 <script>
 (function () {
-  var euro = new Intl.NumberFormat('en-IE', { style:'currency', currency:'EUR', maximumFractionDigits:0 });
+  // Currency is independent of language (a German and an Italian bar both use €; a US bar uses $).
+  var CUR = { EUR:'de-DE', USD:'en-US', GBP:'en-GB', CHF:'de-CH', CAD:'en-CA', AUD:'en-AU', AED:'en-AE', CNY:'zh-CN' };
+  function makeFmt(code){ var c = CUR[code] ? code : 'EUR';
+    return new Intl.NumberFormat(CUR[c] || 'en-IE', { style:'currency', currency:c, maximumFractionDigits:0 }); }
+  var curCode = 'EUR';
+  var fmt = makeFmt(curCode);
   var TARGET = 5; // a tightly-run bar's realistic shrink floor
 
   var I18N = {
@@ -193,7 +213,7 @@
       l_shrink:"Shrinkage — theoretical vs actual", h_shrink:"The share that vanishes to over-pour, waste, theft & miscount. Industry average ≈ 20%.",
       cap:"Recoverable, per year", month:"about {v} / month back in your pocket",
       r_cost:"Monthly liquor cost", r_loss:"Lost to shrink today", r_tight:"If tightened to ~5%",
-      cta:"Get the early-access list", sent:"You're on the list — we'll bring you the real, weighed number.",
+      cta:"Get early access", sent:"You're on the list — we'll bring you the real, weighed number.",
       disc:"<b>An estimate, not a promise.</b> These figures come from industry shrinkage benchmarks applied to your inputs — they show the size of the problem, not a guarantee. Level Ledger's whole job is to replace this estimate with your bar's real, <b>weighed</b> number: ● Confirmed, not guessed." },
     it: { eyebrow:"Gratis · Audit sprechi del bar", h1:"Quanto sta <em>perdendo</em> il tuo bar?",
       intro:"La maggior parte dei bar perde circa un quinto del costo dei liquori tra over-pour, errori di conta, versato e cali — soldi che non compaiono mai su uno scaffale. Muovi i tre slider. Vedi il divario che Level Ledger è fatto per chiudere.",
@@ -202,7 +222,7 @@
       l_shrink:"Calo — teorico vs reale", h_shrink:"La quota che sparisce tra over-pour, sprechi, furti ed errori di conta. Media di settore ≈ 20%.",
       cap:"Recuperabili, all'anno", month:"circa {v} al mese di nuovo in tasca",
       r_cost:"Costo liquori mensile", r_loss:"Perso oggi in cali", r_tight:"Se stretto al ~5%",
-      cta:"Voglio la lista d'accesso", sent:"Sei nella lista — ti porteremo il numero vero, pesato.",
+      cta:"Voglio l'accesso anticipato", sent:"Sei nella lista — ti porteremo il numero vero, pesato.",
       disc:"<b>Una stima, non una promessa.</b> Queste cifre derivano da benchmark di settore applicati ai tuoi dati — mostrano la dimensione del problema, non una garanzia. Il compito di Level Ledger è sostituire questa stima col numero reale e <b>pesato</b> del tuo bar: ● Confirmed, non indovinato." },
     es: { eyebrow:"Gratis · Auditoría de desperdicio", h1:"¿Cuánto está <em>perdiendo</em> tu bar?",
       intro:"La mayoría de los bares pierde cerca de un quinto del coste de licores en sobre-vertidos, errores de conteo, derrames y mermas — dinero que nunca aparece en un estante. Mueve los tres controles. Mira la brecha que Level Ledger cierra.",
@@ -211,7 +231,7 @@
       l_shrink:"Merma — teórico vs real", h_shrink:"La parte que se esfuma en sobre-vertidos, desperdicio, robo y errores de conteo. Media del sector ≈ 20%.",
       cap:"Recuperable, al año", month:"unos {v} al mes de vuelta a tu bolsillo",
       r_cost:"Coste de licor mensual", r_loss:"Perdido hoy en merma", r_tight:"Si se ajusta al ~5%",
-      cta:"Quiero la lista de acceso", sent:"Estás en la lista — te traeremos el número real, pesado.",
+      cta:"Quiero acceso anticipado", sent:"Estás en la lista — te traeremos el número real, pesado.",
       disc:"<b>Una estimación, no una promesa.</b> Estas cifras vienen de referencias del sector aplicadas a tus datos — muestran el tamaño del problema, no una garantía. El trabajo de Level Ledger es sustituir esta estimación por el número real y <b>pesado</b> de tu bar: ● Confirmed, no adivinado." },
     fr: { eyebrow:"Gratuit · Audit du gaspillage", h1:"Combien votre bar <em>perd-il ?</em>",
       intro:"La plupart des bars perdent environ un cinquième du coût de leurs spiritueux en sur-versées, erreurs de comptage, casse et démarque — de l'argent qui n'apparaît sur aucune étagère. Bougez les trois curseurs. Voyez l'écart que Level Ledger comble.",
@@ -220,7 +240,7 @@
       l_shrink:"Démarque — théorique vs réel", h_shrink:"La part qui s'évapore en sur-versées, casse, vol et erreurs de comptage. Moyenne du secteur ≈ 20 %.",
       cap:"Récupérable, par an", month:"environ {v} par mois de retour dans votre poche",
       r_cost:"Coût mensuel des spiritueux", r_loss:"Perdu aujourd'hui en démarque", r_tight:"Si resserré à ~5 %",
-      cta:"Je veux la liste d'accès", sent:"Vous êtes sur la liste — on vous apportera le vrai chiffre, pesé.",
+      cta:"Je veux un accès anticipé", sent:"Vous êtes sur la liste — on vous apportera le vrai chiffre, pesé.",
       disc:"<b>Une estimation, pas une promesse.</b> Ces chiffres viennent de références du secteur appliquées à vos données — ils montrent l'ampleur du problème, pas une garantie. Le rôle de Level Ledger est de remplacer cette estimation par le chiffre réel et <b>pesé</b> de votre bar : ● Confirmed, pas deviné." },
     de: { eyebrow:"Gratis · Schwund-Audit", h1:"Wie viel <em>verliert</em> deine Bar?",
       intro:"Die meisten Bars verlieren rund ein Fünftel ihrer Spirituosenkosten durch Über-Ausschank, Zählfehler, Bruch und Schwund — Geld, das auf keinem Regal auftaucht. Bewege die drei Regler. Sieh die Lücke, die Level Ledger schließt.",
@@ -229,7 +249,7 @@
       l_shrink:"Schwund — theoretisch vs. real", h_shrink:"Der Anteil, der durch Über-Ausschank, Bruch, Diebstahl und Zählfehler verschwindet. Branchenschnitt ≈ 20%.",
       cap:"Rückholbar, pro Jahr", month:"etwa {v} im Monat zurück in deiner Tasche",
       r_cost:"Monatliche Getränkekosten", r_loss:"Heute durch Schwund verloren", r_tight:"Bei Straffung auf ~5%",
-      cta:"Ich will die Zugangsliste", sent:"Du bist auf der Liste — wir bringen dir die echte, gewogene Zahl.",
+      cta:"Früher Zugang sichern", sent:"Du bist auf der Liste — wir bringen dir die echte, gewogene Zahl.",
       disc:"<b>Eine Schätzung, kein Versprechen.</b> Diese Zahlen stammen aus Branchen-Benchmarks, angewandt auf deine Angaben — sie zeigen die Größe des Problems, keine Garantie. Level Ledgers Aufgabe ist, diese Schätzung durch die echte, <b>gewogene</b> Zahl deiner Bar zu ersetzen: ● Confirmed, nicht geraten." },
     ar: { eyebrow:"مجانًا · تدقيق هدر البار", h1:"كم <em>يخسر</em> بارك؟",
       intro:"معظم البارات تخسر نحو خُمس تكلفة المشروبات الكحولية بسبب الصبّ الزائد وأخطاء العدّ والانسكاب والفاقد — مال لا يظهر على أي رفّ. حرّك المؤشرات الثلاثة. شاهد الفجوة التي بُني Level Ledger لسدّها.",
@@ -238,7 +258,7 @@
       l_shrink:"الفاقد — النظري مقابل الفعلي", h_shrink:"الحصة التي تتبخّر في الصبّ الزائد والفاقد والسرقة وأخطاء العدّ. متوسط القطاع ≈ 20%.",
       cap:"قابل للاسترداد، سنويًا", month:"نحو {v} شهريًا تعود إلى جيبك",
       r_cost:"تكلفة المشروبات الشهرية", r_loss:"المفقود اليوم بالفاقد", r_tight:"عند التقليص إلى ~5%",
-      cta:"أريد قائمة الوصول", sent:"أنت في القائمة — سنجلب لك الرقم الحقيقي الموزون.",
+      cta:"أريد الوصول المبكر", sent:"أنت في القائمة — سنجلب لك الرقم الحقيقي الموزون.",
       disc:"<b>تقدير، وليس وعدًا.</b> هذه الأرقام من معايير القطاع مطبَّقة على بياناتك — تُظهر حجم المشكلة لا ضمانًا. مهمة Level Ledger أن تستبدل هذا التقدير برقم بارك الحقيقي <b>الموزون</b>: ● Confirmed، لا تخمين." },
     zh: { eyebrow:"免费 · 酒吧损耗审计", h1:"你的酒吧在<em>流失</em>多少？",
       intro:"多数酒吧因过量倒酒、盘点误差、洒漏和损耗，损失约五分之一的酒水成本——这些钱从不会出现在货架上。拖动三个滑块，看看 Level Ledger 要堵住的缺口。",
@@ -247,7 +267,7 @@
       l_shrink:"损耗——理论 vs 实际", h_shrink:"因过量倒酒、损耗、失窃和盘点误差而消失的比例。行业平均 ≈ 20%。",
       cap:"每年可挽回", month:"约每月 {v} 回到你口袋",
       r_cost:"每月酒水成本", r_loss:"今日损耗损失", r_tight:"若收紧到 ~5%",
-      cta:"获取抢先名单", sent:"你已在名单上——我们会带来真实、称重的数字。",
+      cta:"获取抢先体验", sent:"你已在名单上——我们会带来真实、称重的数字。",
       disc:"<b>这是估算，不是承诺。</b>这些数字基于行业损耗基准套用你的输入——显示问题的规模，而非保证。Level Ledger 的职责是用你酒吧真实、<b>称重</b>的数字取代这个估算：● Confirmed，而非猜测。" }
   };
   var RTL = { ar:true };
@@ -265,14 +285,14 @@
     var cost = R * P / 100;
     var lossToday = cost * S / 100;
     var recoverable = cost * Math.max(0, S - TARGET) / 100;
-    set('rev-val', euro.format(R));
+    set('rev-val', fmt.format(R));
     set('pour-val', P + '%');
     set('shrink-val', S + '%');
-    set('cost', euro.format(Math.round(cost)));
-    set('loss', euro.format(Math.round(lossToday)));
-    set('tight', euro.format(Math.round(cost * TARGET / 100)));
-    set('year', euro.format(Math.round(recoverable * 12)));
-    set('month', L.month.replace('{v}', euro.format(Math.round(recoverable))));
+    set('cost', fmt.format(Math.round(cost)));
+    set('loss', fmt.format(Math.round(lossToday)));
+    set('tight', fmt.format(Math.round(cost * TARGET / 100)));
+    set('year', fmt.format(Math.round(recoverable * 12)));
+    set('month', L.month.replace('{v}', fmt.format(Math.round(recoverable))));
     document.getElementById('hid-year').value = Math.round(recoverable * 12);
     document.getElementById('hid-inputs').value = 'rev=' + R + ';pour=' + P + ';shrink=' + S;
     [rev, pour, shrink].forEach(fillTrack);
@@ -291,6 +311,19 @@
     compute();
   }
   langBtns.forEach(function(b){ b.addEventListener('click', function(){ applyLang(b.getAttribute('data-lang')); }); });
+
+  // Currency selector — remembers the choice, recomputes on change.
+  var curSel = document.getElementById('cur-select');
+  if (curSel) {
+    var savedCur = null; try { savedCur = localStorage.getItem('ll-cur'); } catch(e){}
+    if (savedCur && CUR[savedCur]) { curCode = savedCur; fmt = makeFmt(curCode); curSel.value = curCode; }
+    curSel.addEventListener('change', function(){
+      curCode = curSel.value; fmt = makeFmt(curCode);
+      try { localStorage.setItem('ll-cur', curCode); } catch(e){}
+      compute();
+    });
+  }
+
   var init = 'en';
   try { init = localStorage.getItem('ll-lang') || (navigator.language||'en').slice(0,2).toLowerCase(); } catch(e){}
   if (!I18N[init]) init = 'en';
