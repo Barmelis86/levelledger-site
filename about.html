@@ -80,6 +80,7 @@
   :root[dir="rtl"] .field input { direction:ltr; }
   :root[dir="rtl"] .eyebrow { letter-spacing:normal; text-transform:none; }
   :root[dir="rtl"] .pull { border-left:0; padding-left:0; border-right:2px solid var(--copper); padding-right:22px; }
+  .sent { display:none; margin-top:14px; font-family:var(--display); font-size:1.25rem; color:var(--copper-bright); letter-spacing:-.01em; }
 </style>
 
 <div class="glow" aria-hidden="true"></div>
@@ -131,11 +132,12 @@
     <div class="cta-block">
       <h2 data-i18n="cta_h2">Coming 2026.</h2>
       <p data-i18n="cta_p">The list opens first — and you're first through the door.</p>
-      <form action="https://formspree.io/f/mpqgndyn" method="POST">
+      <form id="waitlist-form" action="https://formspree.io/f/mpqgndyn" method="POST">
         <label class="field"><input type="email" name="email" placeholder="you@yourbar.com" autocomplete="email" required aria-label="Email address"></label>
         <button class="cta" type="submit" data-i18n="cta_btn">Get early access</button>
         <input type="hidden" name="_subject" value="Level Ledger — early access (Story page)">
       </form>
+      <p class="sent" id="sent" data-i18n="sent">You're on the list — first through the door. 🥃</p>
     </div>
   </article>
 </div>
@@ -160,7 +162,7 @@
       pil2t:"Weigh the truth", pil2p:"Count by weight, resolve every cost to ● Confirmed — not estimated, not guessed.",
       pil3t:"Keep the money", pil3p:"See the waste that quietly drains your margin, and stop it.",
       belief:"And a belief that shapes all of it: <b>precision shouldn't mean more work — it should mean less</b>. The counting, the typing, the remembering — that's the effort. Setting a bottle down and letting it resolve itself is the shortcut. The best tool is the one your team barely notices they're using.",
-      cta_h2:"Coming 2026.", cta_p:"The list opens first — and you're first through the door.", cta_btn:"Get early access" },
+      cta_h2:"Coming 2026.", cta_p:"The list opens first — and you're first through the door.", cta_btn:"Get early access", sent:"You're on the list — first through the door. 🥃" },
     it: { eyebrow:"La Storia", h1:"Creato da chi ha <em>davvero lavorato al bar</em>.",
       p1:"Per vent'anni ho lavorato dietro e intorno al bancone. Amavo quasi tutto — tranne una lite ricorrente: <b>a fine mese, quando tutto il locale discuteva su un numero che nessuno riusciva davvero a dimostrare</b>.",
       p2:"Magazzino contato a occhio. Costi stimati. Prep ricordata a metà. La giacenza era sempre \"circa mezza bottiglia\", il pour cost sempre un'alzata di spalle, e il divario tra i libri e lo scaffale sempre colpa di qualcuno.",
@@ -170,7 +172,7 @@
       pil2t:"Pesa la verità", pil2p:"Conta a peso, risolvi ogni costo a ● Confirmed — non stimato, non indovinato.",
       pil3t:"Tieni i soldi", pil3p:"Vedi lo spreco che ti erode il margine, e fermalo.",
       belief:"E una convinzione che guida tutto: <b>la precisione non dovrebbe voler dire più lavoro — dovrebbe volerne meno</b>. Contare, digitare, ricordare — quella è la fatica. Posare una bottiglia e lasciare che si risolva da sola è la scorciatoia. Il miglior strumento è quello che il tuo team quasi non si accorge di usare.",
-      cta_h2:"In arrivo nel 2026.", cta_p:"La lista apre per prima — e sei tu il primo a entrare.", cta_btn:"Voglio l'accesso anticipato" },
+      cta_h2:"In arrivo nel 2026.", cta_p:"La lista apre per prima — e sei tu il primo a entrare.", cta_btn:"Voglio l'accesso anticipato", sent:"Sei nella lista — primo a entrare. 🥃" },
     es: { eyebrow:"La Historia", h1:"Creado por alguien que <em>ha llevado el bar de verdad</em>.",
       p1:"Durante veinte años trabajé detrás y alrededor de la barra. Amaba casi todo — excepto una pelea recurrente: <b>a fin de mes, cuando todo el local discutía sobre un número que nadie podía demostrar</b>.",
       p2:"Stock contado a ojo. Costes estimados. Prep recordada a medias. El inventario siempre era \"media botella más o menos\", el pour cost siempre un encogimiento de hombros, y la brecha entre los libros y el estante siempre culpa de alguien.",
@@ -180,7 +182,7 @@
       pil2t:"Pesa la verdad", pil2p:"Cuenta al peso, resuelve cada coste a ● Confirmed — no estimado, no adivinado.",
       pil3t:"Guarda el dinero", pil3p:"Ve el desperdicio que drena tu margen, y detenlo.",
       belief:"Y una creencia que lo guía todo: <b>la precisión no debería significar más trabajo — debería significar menos</b>. Contar, teclear, recordar — ese es el esfuerzo. Dejar una botella y que se resuelva sola es el atajo. La mejor herramienta es la que tu equipo apenas nota que usa.",
-      cta_h2:"Próximamente 2026.", cta_p:"La lista abre primero — y eres el primero en entrar.", cta_btn:"Quiero acceso anticipado" },
+      cta_h2:"Próximamente 2026.", cta_p:"La lista abre primero — y eres el primero en entrar.", cta_btn:"Quiero acceso anticipado", sent:"Estás en la lista — el primero en entrar. 🥃" },
     fr: { eyebrow:"L'Histoire", h1:"Créé par quelqu'un qui a <em>vraiment tenu le bar</em>.",
       p1:"Pendant vingt ans j'ai travaillé derrière et autour du comptoir. J'aimais presque tout — sauf une dispute récurrente : <b>en fin de mois, quand tout l'établissement se disputait sur un chiffre que personne ne pouvait prouver</b>.",
       p2:"Stock compté à l'œil. Coûts estimés. Mise en place à moitié mémorisée. L'inventaire était toujours « à peu près une demi-bouteille », le pour cost toujours un haussement d'épaules, et l'écart entre les livres et l'étagère toujours la faute de quelqu'un.",
@@ -190,7 +192,7 @@
       pil2t:"Peser la vérité", pil2p:"Compter au poids, résoudre chaque coût en ● Confirmed — pas estimé, pas deviné.",
       pil3t:"Garder l'argent", pil3p:"Voir le gaspillage qui grignote votre marge, et l'arrêter.",
       belief:"Et une conviction qui guide tout : <b>la précision ne devrait pas signifier plus de travail — mais moins</b>. Compter, taper, se souvenir — voilà l'effort. Poser une bouteille et la laisser se résoudre seule, voilà le raccourci. Le meilleur outil est celui que votre équipe remarque à peine utiliser.",
-      cta_h2:"Bientôt 2026.", cta_p:"La liste ouvre en premier — et vous entrez le premier.", cta_btn:"Je veux un accès anticipé" },
+      cta_h2:"Bientôt 2026.", cta_p:"La liste ouvre en premier — et vous entrez le premier.", cta_btn:"Je veux un accès anticipé", sent:"Vous êtes sur la liste — le premier à entrer. 🥃" },
     de: { eyebrow:"Die Geschichte", h1:"Gebaut von jemandem, der die Bar <em>wirklich geführt hat</em>.",
       p1:"Zwanzig Jahre habe ich hinter und rund um den Tresen gearbeitet. Ich liebte fast alles daran — außer einem wiederkehrenden Streit: <b>am Monatsende, wenn der ganze Laden über eine Zahl stritt, die niemand beweisen konnte</b>.",
       p2:"Bestand nach Gefühl gezählt. Kosten geschätzt. Prep halb erinnert. Der Bestand war immer „ungefähr eine halbe Flasche“, der Pour Cost immer ein Schulterzucken, und die Lücke zwischen Büchern und Regal immer jemandes Schuld.",
@@ -200,7 +202,7 @@
       pil2t:"Die Wahrheit wiegen", pil2p:"Nach Gewicht zählen, jede Kosten zu ● Confirmed auflösen — nicht geschätzt, nicht geraten.",
       pil3t:"Das Geld behalten", pil3p:"Den Schwund sehen, der deine Marge frisst — und ihn stoppen.",
       belief:"Und eine Überzeugung, die alles prägt: <b>Präzision sollte nicht mehr Arbeit bedeuten — sondern weniger</b>. Zählen, tippen, sich erinnern — das ist der Aufwand. Eine Flasche abstellen und sie sich selbst auflösen lassen — das ist die Abkürzung. Das beste Werkzeug ist das, dessen Nutzung dein Team kaum bemerkt.",
-      cta_h2:"Kommt 2026.", cta_p:"Die Liste öffnet zuerst — und du gehst als Erster hinein.", cta_btn:"Früher Zugang sichern" },
+      cta_h2:"Kommt 2026.", cta_p:"Die Liste öffnet zuerst — und du gehst als Erster hinein.", cta_btn:"Früher Zugang sichern", sent:"Du bist auf der Liste — als Erster dabei. 🥃" },
     ar: { eyebrow:"القصّة", h1:"بُني على يد من <em>أدار البار فعلاً</em>.",
       p1:"لعشرين عامًا عملت خلف البار وحوله. أحببت كل شيء فيه تقريبًا — إلا خلافًا متكررًا: <b>في نهاية الشهر، حين يتجادل المكان كله حول رقم لا يستطيع أحد إثباته</b>.",
       p2:"مخزون محسوب بالتخمين. تكاليف مقدَّرة. تحضير محفوظ نصفيًا. كان الجرد دائمًا \"نصف زجاجة تقريبًا\"، وتكلفة الصبّ دائمًا هزّة كتف، والفجوة بين الدفاتر والرفّ دائمًا خطأ أحدهم.",
@@ -210,7 +212,7 @@
       pil2t:"زِن الحقيقة", pil2p:"احسب بالوزن، وحُلّ كل تكلفة إلى ● Confirmed — لا مقدَّرة ولا مخمَّنة.",
       pil3t:"احتفظ بالمال", pil3p:"شاهد الهدر الذي يستنزف هامشك، وأوقفه.",
       belief:"وقناعة تُشكّل كل ذلك: <b>الدقّة يجب ألّا تعني عملاً أكثر — بل أقل</b>. العدّ والكتابة والتذكّر هي الجهد. أن تضع زجاجة وتتركها تُحسم بنفسها هو الاختصار. أفضل أداة هي التي لا يكاد فريقك يلاحظ أنه يستخدمها.",
-      cta_h2:"قريبًا 2026.", cta_p:"القائمة تُفتح أولًا — وأنت أول الداخلين.", cta_btn:"أريد الوصول المبكر" },
+      cta_h2:"قريبًا 2026.", cta_p:"القائمة تُفتح أولًا — وأنت أول الداخلين.", cta_btn:"أريد الوصول المبكر", sent:"أنت في القائمة — أول الداخلين. 🥃" },
     zh: { eyebrow:"故事", h1:"由一个<em>真正经营过酒吧</em>的人打造。",
       p1:"二十年来我在吧台内外工作。我几乎热爱这里的一切——除了一场反复出现的争执：<b>每到月底，整个店都在争论一个谁也无法证明的数字</b>。",
       p2:"库存靠猜。成本靠估。备料只记得一半。存货永远是\"大概半瓶\"，酒水成本永远是一个耸肩，账本与货架之间的差距永远是某个人的错。",
@@ -220,7 +222,7 @@
       pil2t:"称出真相", pil2p:"按重量盘点，把每一项成本落到 ● Confirmed——不估算，不猜测。",
       pil3t:"留住利润", pil3p:"看见蚕食利润的浪费，并把它堵住。",
       belief:"还有一个贯穿始终的信念：<b>精确不该意味着更多工作——而应更少</b>。数数、打字、记忆——那才是负担。把瓶子放下、让它自己得出结果，才是捷径。最好的工具，是你的团队几乎察觉不到自己在用的那一个。",
-      cta_h2:"2026 年上线。", cta_p:"名单率先开放——你第一个进门。", cta_btn:"获取抢先体验" }
+      cta_h2:"2026 年上线。", cta_p:"名单率先开放——你第一个进门。", cta_btn:"获取抢先体验", sent:"你已在名单上——第一个进门。🥃" }
   };
   var RTL = { ar:true };
   var btns = Array.prototype.slice.call(document.querySelectorAll('.langs button'));
@@ -238,5 +240,16 @@
   try { init = localStorage.getItem('ll-lang') || (navigator.language||'en').slice(0,2).toLowerCase(); } catch(e){}
   if (!I18N[init]) init='en';
   apply(init);
+
+  // Waitlist — AJAX submit so the visitor stays on the branded page (falls back to normal POST on error).
+  var wf = document.getElementById('waitlist-form');
+  if (wf) wf.addEventListener('submit', function(e){
+    if (!window.fetch) return;
+    e.preventDefault();
+    fetch(wf.action, { method:'POST', body:new FormData(wf), headers:{ 'Accept':'application/json' } })
+      .then(function(r){ if(!r.ok) throw new Error('bad'); wf.style.display='none';
+        var s=document.getElementById('sent'); if(s) s.style.display='block'; })
+      .catch(function(){ wf.submit(); });
+  });
 })();
 </script>

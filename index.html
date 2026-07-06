@@ -234,6 +234,14 @@
     font-size: 13px;
     color: var(--muted-dim);
   }
+  .sent {
+    display: none;
+    margin-top: 6px;
+    font-family: var(--font-display);
+    font-size: 1.2rem;
+    color: var(--copper-bright);
+    letter-spacing: -.01em;
+  }
 
   /* ── The three-word thesis, spoken in the product's own confidence grammar.
      Teases the essence; explains nothing. ── */
@@ -347,13 +355,14 @@
     <h1 data-i18n-html="h1">Run the whole bar on numbers you can <em>finally trust</em>.</h1>
     <p class="lede" data-i18n-html="lede">Stations ready, prep planned, stock counted by weight, every cost <b>confirmed</b> — not estimated. Level Ledger organizes the operational life of your bar, cuts the waste that quietly drains your margin, and turns month-end guesswork into <b>money you keep</b>.</p>
 
-    <form class="waitlist" action="https://formspree.io/f/mpqgndyn" method="POST">
+    <form class="waitlist" id="waitlist-form" action="https://formspree.io/f/mpqgndyn" method="POST">
       <label class="field">
         <input type="email" name="email" placeholder="you@yourbar.com" autocomplete="email" required aria-label="Email address">
       </label>
       <button class="cta" type="submit" data-i18n="cta">Get early access</button>
       <input type="hidden" name="_subject" value="Level Ledger — early access signup">
     </form>
+    <p class="sent" id="sent" data-i18n="sent">You're on the list — first through the door. 🥃</p>
     <p class="reassure" data-i18n="reassure">No spam. One note when the doors open — and you're first through them.</p>
 
     <a class="audit-cta" href="audit.html" data-i18n="auditcta">How much is your bar leaking? Take the 30-second audit →</a>
@@ -386,7 +395,8 @@
       reassure: "No spam. One note when the doors open — and you're first through them.",
       t1: "Organize", t2: "Weigh", t3: "Save",
       foot: "© 2026 Level Ledger · Built for the bar, on the bar.",
-      auditcta: "How much is your bar leaking? Take the 30-second audit →"
+      auditcta: "How much is your bar leaking? Take the 30-second audit →",
+      sent: "You're on the list — first through the door. 🥃"
     },
     it: {
       eyebrow: "In arrivo · 2026",
@@ -396,7 +406,8 @@
       reassure: "Niente spam. Un solo avviso quando apriamo — e sei il primo a entrare.",
       t1: "Organizza", t2: "Pesa", t3: "Risparmia",
       foot: "© 2026 Level Ledger · Fatto per il bar, sul bancone.",
-      auditcta: "Quanto sta perdendo il tuo bar? Fai l'audit in 30 secondi →"
+      auditcta: "Quanto sta perdendo il tuo bar? Fai l'audit in 30 secondi →",
+      sent: "Sei nella lista — primo a entrare. 🥃"
     },
     es: {
       eyebrow: "Próximamente · 2026",
@@ -406,7 +417,8 @@
       reassure: "Nada de spam. Un solo aviso cuando abramos — y eres el primero en entrar.",
       t1: "Organiza", t2: "Pesa", t3: "Ahorra",
       foot: "© 2026 Level Ledger · Hecho para la barra, en la barra.",
-      auditcta: "¿Cuánto está perdiendo tu bar? Haz la auditoría en 30 segundos →"
+      auditcta: "¿Cuánto está perdiendo tu bar? Haz la auditoría en 30 segundos →",
+      sent: "Estás en la lista — el primero en entrar. 🥃"
     },
     fr: {
       eyebrow: "Bientôt · 2026",
@@ -416,7 +428,8 @@
       reassure: "Pas de spam. Un seul message à l'ouverture — et vous entrez en premier.",
       t1: "Organiser", t2: "Peser", t3: "Économiser",
       foot: "© 2026 Level Ledger · Fait pour le bar, au comptoir.",
-      auditcta: "Combien votre bar perd-il ? Faites l’audit en 30 secondes →"
+      auditcta: "Combien votre bar perd-il ? Faites l’audit en 30 secondes →",
+      sent: "Vous êtes sur la liste — le premier à entrer. 🥃"
     },
     de: {
       eyebrow: "Demnächst · 2026",
@@ -426,7 +439,8 @@
       reassure: "Kein Spam. Eine Nachricht, wenn wir öffnen — und du bist als Erster dabei.",
       t1: "Organisieren", t2: "Wiegen", t3: "Sparen",
       foot: "© 2026 Level Ledger · Für die Bar gemacht, an der Bar.",
-      auditcta: "Wie viel verliert deine Bar? Mach den Check in 30 Sekunden →"
+      auditcta: "Wie viel verliert deine Bar? Mach den Check in 30 Sekunden →",
+      sent: "Du bist auf der Liste — als Erster dabei. 🥃"
     },
     ar: {
       eyebrow: "قريبًا · 2026",
@@ -436,7 +450,8 @@
       reassure: "بلا رسائل مزعجة. رسالة واحدة عند الافتتاح — وستكون أول الداخلين.",
       t1: "نظّم", t2: "زِن", t3: "وفّر",
       foot: "© 2026 Level Ledger · صُنع للبار، خلف البار.",
-      auditcta: "كم يخسر بارك؟ جرّب التدقيق في 30 ثانية ←"
+      auditcta: "كم يخسر بارك؟ جرّب التدقيق في 30 ثانية ←",
+      sent: "أنت في القائمة — أول الداخلين. 🥃"
     },
     zh: {
       eyebrow: "即将上线 · 2026",
@@ -446,7 +461,8 @@
       reassure: "绝无垃圾邮件。开放时只发一条通知——你将第一个进入。",
       t1: "整理", t2: "称重", t3: "省钱",
       foot: "© 2026 Level Ledger · 为吧台而生，就在吧台。",
-      auditcta: "你的酒吧在流失多少？做个 30 秒审计 →"
+      auditcta: "你的酒吧在流失多少？做个 30 秒审计 →",
+      sent: "你已在名单上——第一个进门。🥃"
     }
   };
   var RTL = { ar: true };
@@ -478,5 +494,20 @@
   } catch (e) {}
   if (!I18N[init]) init = 'en';
   apply(init);
+
+  // Waitlist — AJAX submit so the visitor stays on the branded page (falls back to a normal POST
+  // → Formspree /thanks if fetch is unavailable or errors).
+  var wf = document.getElementById('waitlist-form');
+  if (wf) wf.addEventListener('submit', function (e) {
+    if (!window.fetch) return;
+    e.preventDefault();
+    fetch(wf.action, { method: 'POST', body: new FormData(wf), headers: { 'Accept': 'application/json' } })
+      .then(function (r) {
+        if (!r.ok) throw new Error('bad');
+        wf.style.display = 'none';
+        var s = document.getElementById('sent'); if (s) s.style.display = 'block';
+      })
+      .catch(function () { wf.submit(); });
+  });
 })();
 </script>
