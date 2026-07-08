@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Level Ledger — Data Processing Agreement</title>
+<style>
+  :root { --bg:#15100a; --card:#221a14; --ink:#f4ece0; --muted:#c9bca8; --copper:#C8862F; --line:#3a2f22; }
+  *{box-sizing:border-box}
+  body { font-family: system-ui, -apple-system, "Segoe UI", sans-serif; background:var(--bg); color:var(--ink); margin:0; line-height:1.65; }
+  main { max-width:780px; margin:0 auto; padding:48px 24px 80px; }
+  h1 { font-size:1.85rem; margin:0 0 4px; letter-spacing:-.01em; }
+  h2 { font-size:1.12rem; margin:28px 0 8px; color:var(--copper); }
+  h3 { font-size:1rem; margin:18px 0 6px; }
+  .sub { color:var(--muted); margin:0 0 4px; }
+  .updated { color:var(--muted); font-size:.9rem; margin:0 0 8px; }
+  p, li, td, th { color:var(--ink); }
+  ul, ol { padding-left:20px; }
+  a { color:var(--copper); }
+  table { width:100%; border-collapse:collapse; margin:10px 0; font-size:.95rem; }
+  th, td { text-align:left; padding:8px 10px; border-bottom:1px solid var(--line); vertical-align:top; }
+  th { color:var(--muted); font-weight:600; }
+  .note { background:var(--card); border-left:3px solid var(--copper); border-radius:8px; padding:12px 14px; color:var(--muted); font-size:.92rem; margin:16px 0; }
+  .sign { display:flex; gap:24px; flex-wrap:wrap; margin-top:20px; }
+  .sign > div { flex:1; min-width:240px; border:1px solid var(--line); border-radius:10px; padding:14px 16px; }
+  .fill { color:var(--copper); }
+  .back { display:inline-block; margin-top:28px; padding-top:16px; border-top:1px solid var(--line); color:var(--muted); }
+</style>
+</head>
+<body>
+<main>
+  <h1>Data Processing Agreement (DPA)</h1>
+  <p class="sub">Level Ledger by Bar_Melis · GDPR Article 28</p>
+  <p class="updated">Version 1.0 — 8 July 2026</p>
+
+  <div class="note"><strong>Template — not legal advice.</strong> A starting point for an early-access pilot in
+  the EU. Have it reviewed by a qualified data-protection lawyer before signing.</div>
+
+  <p>This Agreement is entered into between:</p>
+  <ul>
+    <li><strong>The Venue</strong> — <span class="fill">[venue legal name, address]</span> — the
+      <strong>Controller</strong>; and</li>
+    <li><strong>Andrea Melis, operating as Bar_Melis</strong>, Italy — the <strong>Processor</strong>.</li>
+  </ul>
+  <p>It governs the Processor's processing of personal data on the Controller's behalf when providing the Level
+  Ledger service, and forms part of the <a href="terms.html">Terms of Service</a>. Where they conflict on data
+  protection, this DPA prevails.</p>
+
+  <h2>1. Roles &amp; subject matter</h2>
+  <p>The Controller determines the purposes and means of processing its venue data. The Processor processes
+  personal data only to provide and support Level Ledger, strictly on the Controller's documented instructions
+  (these terms and its use of the Service being such instructions).</p>
+
+  <h2>2. Duration, nature &amp; purpose</h2>
+  <p><strong>Duration:</strong> for the term of the Service. <strong>Nature &amp; purpose:</strong> hosting,
+  storing, and processing the Controller's operational records so the venue can run its bar operations.</p>
+
+  <h2>3. Data subjects &amp; categories of personal data</h2>
+  <table>
+    <tr><th>Data subjects</th><th>Personal data</th></tr>
+    <tr><td>The venue's staff</td><td>Name, role, hashed access PIN, activity/authorship stamps</td></tr>
+    <tr><td>Supplier contacts</td><td>Contact name, email, phone (as entered by the venue)</td></tr>
+  </table>
+  <p>No special-category data is required by the Service. The Controller must not enter special-category or
+  irrelevant personal data.</p>
+
+  <h2>4. Processor obligations (Art. 28(3))</h2>
+  <ol>
+    <li><strong>Instructions only</strong> — process personal data only on the Controller's documented
+      instructions, including on international transfers, unless required by law (in which case it informs the
+      Controller unless the law forbids).</li>
+    <li><strong>Confidentiality</strong> — ensure persons authorised to process are bound by confidentiality.</li>
+    <li><strong>Security (Art. 32)</strong> — implement appropriate technical and organisational measures (see §5).</li>
+    <li><strong>Sub-processors</strong> — engage sub-processors only under §6; impose equivalent data-protection
+      obligations; remain fully liable for them.</li>
+    <li><strong>Assistance with data-subject rights</strong> — assist the Controller, by appropriate measures, to
+      respond to requests to exercise data-subject rights (access, rectification, erasure, portability,
+      restriction, objection).</li>
+    <li><strong>Assistance with compliance</strong> — assist with security, breach notification, data-protection
+      impact assessments, and prior consultation, taking account of the nature of processing and information
+      available.</li>
+    <li><strong>Breach notification</strong> — notify the Controller <strong>without undue delay</strong> after
+      becoming aware of a personal-data breach, with the information the Controller needs to meet its obligations.</li>
+    <li><strong>Return or deletion</strong> — at the Controller's choice, delete or return all personal data at the
+      end of the Service and delete existing copies, unless retention is required by law.</li>
+    <li><strong>Audit</strong> — make available information necessary to demonstrate compliance and allow and
+      contribute to reasonable audits by the Controller or its mandated auditor.</li>
+  </ol>
+
+  <h2>5. Security measures (Art. 32)</h2>
+  <ul>
+    <li>Each venue runs on a <strong>dedicated, isolated instance</strong> (data is not co-mingled between venues).</li>
+    <li><strong>Encryption at rest</strong> — the database volume is encrypted.</li>
+    <li><strong>Encryption in transit</strong> — all access over HTTPS/TLS.</li>
+    <li><strong>Credentials</strong> — access PINs are stored <strong>hashed with a salt</strong>, never in clear.</li>
+    <li><strong>Access control</strong> — role-based authorisation (default-deny); server-verified sessions with
+      expiry.</li>
+    <li><strong>Backups</strong> — periodic backups; volume snapshots enabled.</li>
+  </ul>
+
+  <h2>6. Sub-processors</h2>
+  <p>The Controller authorises the following sub-processor:</p>
+  <table>
+    <tr><th>Sub-processor</th><th>Purpose</th><th>Location</th></tr>
+    <tr><td>Fly.io (hosting)</td><td>Hosts the venue's Level Ledger instance and encrypted storage</td><td>EU — Frankfurt (fra)</td></tr>
+  </table>
+  <p>The Processor will give the Controller reasonable prior notice of any intended change of sub-processor,
+  allowing the Controller to object.</p>
+
+  <h2>7. International transfers</h2>
+  <p>Personal data is hosted in the <strong>EU (Frankfurt)</strong>. The Processor will not transfer personal data
+  outside the EEA without an appropriate transfer mechanism (e.g. Standard Contractual Clauses) and prior notice.</p>
+
+  <h2>8. Liability &amp; governing law</h2>
+  <p>Liability under this DPA is subject to the limitations in the <a href="terms.html">Terms of Service</a>, save
+  for liability that cannot be limited under the GDPR. This DPA is governed by the laws of <strong>Italy</strong>.</p>
+
+  <h2>9. Signatures</h2>
+  <div class="sign">
+    <div>
+      <strong>Controller (the Venue)</strong><br><br>
+      Name: <span class="fill">________________</span><br>
+      Title: <span class="fill">________________</span><br>
+      Date: <span class="fill">____________</span><br>
+      Signature: <span class="fill">________________</span>
+    </div>
+    <div>
+      <strong>Processor (Bar_Melis)</strong><br><br>
+      Name: Andrea Melis<br>
+      Title: Founder<br>
+      Date: <span class="fill">____________</span><br>
+      Signature: <span class="fill">________________</span>
+    </div>
+  </div>
+
+  <h2>Contact</h2>
+  <p>Data matters: <a href="mailto:hello@levelledger.bar">hello@levelledger.bar</a></p>
+
+  <a class="back" href="index.html">← levelledger.bar</a>
+</main>
+</body>
+</html>
